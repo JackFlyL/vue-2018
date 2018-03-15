@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-size:14px;
+  font-family:"Microsoft YaHei",sans-serif;/*设备默认字体*/
+  color:#333;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+/*reset css*/
+*, ::before, ::after{
+  margin:0;
+  padding:0;
+  /*清除移动端默认的点击高亮效果*/
+  -webkit-tap-highlight-color:transparent;
+  /*设置以边框开始计算宽度*/
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+a {
+  color:#333;
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:none;
+}
+
+ul, ol{
+  list-style:none;
+}
+
+input {
+  border:none;
+  outline:none;
+  /*清除移动端默认的表单样式*/
+  -webkit-appearance:none;
+}
+
+.news-channel .v-modal {
+  top: 40px;
+}
+
+.news-channel  .mint-popup-right {
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+  background: rgba(10, 10, 10, .4);
+}
+
