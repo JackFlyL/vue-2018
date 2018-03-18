@@ -2,17 +2,17 @@
   <div class="channel_list">
     <div class="header">
       <span>频道管理</span>
-      <span class="close" @click="close()">x</span>
+      <span class="close" @click="close">x</span>
     </div>
     <div class="container">
       <div class="con_selected">
-        <p v-for="(val, key) in list" :key="key">{{ val.name }}</p>
+        <p v-for="(val, key) in list" :key="key" @click="selectTab(key + 1)">{{ val.name }}</p>
         <p class="hidden"></p>
         <p class="hidden"></p>
       </div>
       <div class="alternative_tabs">
         <header class="cont_header">
-          点击添加更多频道{{ channelType.name }}
+          点击添加更多频道
         </header>
         <div class="con_alternative">
           <p v-for="(val, key) in listNotSelect" :key="key">{{ val.name }}</p>
@@ -27,7 +27,6 @@
 <script>
 export default {
   name: 'home',
-  props: ['channelType'],
   data () {
     return {
       list: [
@@ -128,8 +127,10 @@ export default {
   },
   methods: {
     close: function () {
-      this.channelType.name = 'new'
       this.$emit('increment') // 通知父组件
+    },
+    selectTab: function (index) {
+      this.$emit('changeTab', index)
     }
   }
 }
