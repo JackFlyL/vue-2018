@@ -123,20 +123,25 @@ export default {
       this.selected = index.toString()
     },
     loadMore: function () {
-      this.loading = true
+      // this.loading = true
+      // Indicator.open({
+      //   text: '加载中...',
+      //   spinnerType: 'triple-bounce'
+      // })
+
+      setTimeout(() => {
+        let curResultLen = this.news.length / 10 + 1
+
+        this.getNews(this.curChannelId, curResultLen, true)
+        // Indicator.close()
+      }, 1000)
+    },
+    getNews: function (id, curPage, isLoadMore) {
       Indicator.open({
         text: '加载中...',
         spinnerType: 'triple-bounce'
       })
 
-      setTimeout(() => {
-        let curResultLen = this.news.length / 10 + 1
-
-        this.getNews(this.curChannelId, curResultLen)
-        Indicator.close()
-      }, 1000)
-    },
-    getNews: function (id, curPage) {
       this.$http({
         url: `http://ali-news.showapi.com/newsList`,
         method: `get`,
@@ -148,9 +153,10 @@ export default {
         },
         headers: { Authorization: 'APPCODE d8cb38a548224576a8bf88fdfc464c03' }
       }).then(({ data }) => {
+        Indicator.close()
         const results = data.showapi_res_body.pagebean.contentlist
 
-        if (this.news.length) {
+        if (this.news.length && isLoadMore) {
           this.news = [...this.news, ...results]
           console.info(this.news, 'hahah')
           return
