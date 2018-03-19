@@ -157,6 +157,7 @@ export default {
         const results = data.showapi_res_body.pagebean.contentlist
 
         if (this.news.length && isLoadMore) {
+
           this.news = [...this.news, ...results]
           console.info(this.news, 'hahah')
           return
