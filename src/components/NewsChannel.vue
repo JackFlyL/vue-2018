@@ -26,7 +26,7 @@
                       infinite-scroll-immediate-check="false">
       <mt-tab-container-item v-for="(value, indexId) in channelListDate" :id="indexId" :key="indexId">
         <ul>
-          <li v-for="(val, key) in news" :key="key" @click="linkAricle(val.link)">
+          <li v-for="(val, key) in news" :key="key" @click="linkAricle(val.html)">
             <template v-if="val && !val.havePic">
               <div class="no_pic">
                 <header class="item_header">{{ val.title }}</header>
@@ -123,12 +123,6 @@ export default {
       this.selected = index.toString()
     },
     loadMore: function () {
-      // this.loading = true
-      // Indicator.open({
-      //   text: '加载中...',
-      //   spinnerType: 'triple-bounce'
-      // })
-
       setTimeout(() => {
         let curResultLen = this.news.length / 10 + 1
 
@@ -149,7 +143,8 @@ export default {
           channelId: id,
           maxResult: 10,
           needAllList: false,
-          page: curPage
+          page: curPage,
+          needHtml: 1
         },
         headers: { Authorization: 'APPCODE d8cb38a548224576a8bf88fdfc464c03' }
       }).then(({ data }) => {
@@ -171,8 +166,16 @@ export default {
         })
       })
     },
-    linkAricle: function (link) {
-      window.location.href = link
+    linkAricle: function (tml) {
+      console.info(tml)
+      // window.location.href = link
+      this.$router.push({
+        name: 'article_detail', // 组件在路由中注册时候的name
+        params: {
+          name: 'name',
+          dataObj: tml
+        }
+      })
     }
   },
   components: {
